@@ -1,23 +1,31 @@
 package reddit
 
 import (
+	"context"
 	"encoding/xml"
 	"fmt"
 
 	"resty.dev/v3"
+
+	"github.com/ryansiau/utilities/go/config"
 )
 
-func FetchRSS(subreddit string) (*Feed, error) {
+func FetchRSS(ctx context.Context, subreddit string) (*Feed, error) {
 	res := Feed{}
 
-	resp, err := resty.New().R().SetResult(&res).Get("https://www.reddit.com/r/" + subreddit + "/.rss")
+	client := resty.New()
+	client.SetHeader("User-Agent", config.HTTPClientUserAgent)
+
+	resp, err := client.R().
+		SetContext(ctx).
+		SetResult(&res).
+		Get("https://www.reddit.com/r/" + subreddit + "/.rss")
 	if err != nil {
 		return nil, err
 	}
 
 	if resp.StatusCode() != 200 {
-		fmt.Printf("error: %v\n", resp.String())
-		return nil, fmt.Errorf("status code: %d", resp.StatusCode())
+		return nil, fmt.Errorf("status code: %d, body: %s", resp.StatusCode(), resp.String())
 	}
 
 	return &res, nil

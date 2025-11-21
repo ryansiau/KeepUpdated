@@ -36,7 +36,7 @@ func (r *Adapter) Type() string {
 
 // Fetch retrieves new content from Reddit
 func (r *Adapter) Fetch(ctx context.Context) ([]crawler.Content, error) {
-	feed, err := FetchRSS(r.subreddit)
+	feed, err := FetchRSS(ctx, r.subreddit)
 	if err != nil {
 		return nil, err
 	}

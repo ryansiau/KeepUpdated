@@ -1,22 +1,30 @@
 package reddit
 
 import (
+	"context"
 	"fmt"
 
 	"resty.dev/v3"
+
+	"github.com/ryansiau/utilities/go/config"
 )
 
-func FetchSubreddit(subreddit string) (*Subreddit, error) {
+func FetchSubreddit(ctx context.Context, subreddit string) (*Subreddit, error) {
 	res := Subreddit{}
 
-	resp, err := resty.New().R().SetResult(&res).Get("https://www.reddit.com/r/" + subreddit + ".json")
+	client := resty.New()
+	client.SetHeader("User-Agent", config.HTTPClientUserAgent)
+
+	resp, err := client.R().
+		SetContext(ctx).
+		SetResult(&res).
+		Get("https://www.reddit.com/r/" + subreddit + ".json")
 	if err != nil {
 		return nil, err
 	}
 
 	if resp.StatusCode() != 200 {
-		fmt.Printf("error: %v\n", resp.String())
-		return nil, fmt.Errorf("status code: %d", resp.StatusCode())
+		return nil, fmt.Errorf("status code: %d, body: %s", resp.StatusCode(), resp.String())
 	}
 
 	return &res, nil
