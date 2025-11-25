@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ryansiau/utilities/go/crawler"
+	"github.com/ryansiau/utilities/go/model"
 )
 
 // ConsoleNotifier is a simple notifier that prints to the console
@@ -34,7 +34,7 @@ func (n *ConsoleNotifier) Type() string {
 }
 
 // Send sends a notification for the given content
-func (n *ConsoleNotifier) Send(ctx context.Context, content crawler.Content) error {
+func (n *ConsoleNotifier) Send(ctx context.Context, content model.Content) error {
 	fmt.Printf("🔔 NEW CONTENT FROM %s 🔔\n", content.Platform)
 	fmt.Printf("Title: %s\n", content.Title)
 	fmt.Printf("Author: %s\n", content.Author)

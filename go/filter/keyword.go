@@ -3,7 +3,7 @@ package filter
 import (
 	"strings"
 
-	"github.com/ryansiau/utilities/go/crawler"
+	"github.com/ryansiau/utilities/go/model"
 )
 
 // KeywordFilter is a filter that checks for keywords in the content title
@@ -34,7 +34,7 @@ func (f *KeywordFilter) Type() string {
 }
 
 // Apply checks if the content passes the filter
-func (f *KeywordFilter) Apply(content crawler.Content) bool {
+func (f *KeywordFilter) Apply(content model.Content) bool {
 	// If no keywords are specified, all content passes the filter
 	if len(f.keywords) == 0 {
 		return true
