@@ -7,14 +7,14 @@ import (
 
 	"resty.dev/v3"
 
-	"github.com/ryansiau/utilities/go/config"
+	"github.com/ryansiau/utilities/go/common"
 )
 
 func FetchRSS(ctx context.Context, subreddit string) (*Feed, error) {
 	res := Feed{}
 
 	client := resty.New()
-	client.SetHeader("User-Agent", config.HTTPClientUserAgent)
+	client.SetHeader("User-Agent", common.HTTPClientUserAgent)
 
 	resp, err := client.R().
 		SetContext(ctx).

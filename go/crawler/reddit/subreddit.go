@@ -6,14 +6,14 @@ import (
 
 	"resty.dev/v3"
 
-	"github.com/ryansiau/utilities/go/config"
+	"github.com/ryansiau/utilities/go/common"
 )
 
 func FetchSubreddit(ctx context.Context, subreddit string) (*Subreddit, error) {
 	res := Subreddit{}
 
 	client := resty.New()
-	client.SetHeader("User-Agent", config.HTTPClientUserAgent)
+	client.SetHeader("User-Agent", common.HTTPClientUserAgent)
 
 	resp, err := client.R().
 		SetContext(ctx).

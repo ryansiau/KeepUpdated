@@ -4,24 +4,29 @@ import (
 	"context"
 	"time"
 
-	"github.com/ryansiau/utilities/go/crawler"
+	"github.com/ryansiau/utilities/go/model"
 )
 
 // Adapter adapts the Reddit RSS fetcher to the Source interface
 type Adapter struct {
-	subreddit string
-	name      string
+	config *RedditCrawlerConfig
+	name   string
 }
 
-// NewAdapter creates a new Reddit adapter
-func NewAdapter(subreddit string, name string) *Adapter {
+// NewAdapter creates a new Reddit adapter with configuration
+func NewAdapter(config *RedditCrawlerConfig, name string) (*Adapter, error) {
+	if err := config.Validate(); err != nil {
+		return nil, err
+	}
+
 	if name == "" {
-		name = "Reddit: r/" + subreddit
+		name = "Reddit: r/" + config.Subreddit
 	}
+
 	return &Adapter{
-		subreddit: subreddit,
-		name:      name,
-	}
+		config: config,
+		name:   name,
+	}, nil
 }
 
 // Name returns the name of the source
@@ -31,27 +36,27 @@ func (r *Adapter) Name() string {
 
 // Type returns the platform type
 func (r *Adapter) Type() string {
-	return "Reddit"
+	return "reddit"
 }
 
 // Fetch retrieves new content from Reddit
-func (r *Adapter) Fetch(ctx context.Context) ([]crawler.Content, error) {
-	feed, err := FetchRSS(ctx, r.subreddit)
+func (r *Adapter) Fetch(ctx context.Context) ([]model.Content, error) {
+	feed, err := FetchRSS(ctx, r.config.Subreddit)
 	if err != nil {
 		return nil, err
 	}
 
-	var contents []crawler.Content
+	var contents []model.Content
 	for _, post := range feed.Entry {
 		// Convert Reddit post to generic Content
-		content := crawler.Content{
+		content := model.Content{
 			ID:          post.ID,
 			Title:       post.Title,
 			URL:         post.Link.Href,
 			Author:      post.Author.Name,
 			Platform:    "Reddit",
 			PublishedAt: parseTime(post.Published),
-			UpdatedAt:   parseTime(post.Updated),
+			UpdatedAt:   time.Now(),
 			Metadata: map[string]interface{}{
 				"content": string(post.Content),
 			},
