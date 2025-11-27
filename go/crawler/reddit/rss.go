@@ -4,19 +4,12 @@ import (
 	"context"
 	"encoding/xml"
 	"fmt"
-
-	"resty.dev/v3"
-
-	"github.com/ryansiau/utilities/go/common"
 )
 
-func FetchRSS(ctx context.Context, subreddit string) (*Feed, error) {
+func (a *Adapter) FetchRSS(ctx context.Context, subreddit string) (*Feed, error) {
 	res := Feed{}
 
-	client := resty.New()
-	client.SetHeader("User-Agent", common.HTTPClientUserAgent)
-
-	resp, err := client.R().
+	resp, err := a.client.R().
 		SetContext(ctx).
 		SetResult(&res).
 		Get("https://www.reddit.com/r/" + subreddit + "/.rss")

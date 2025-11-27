@@ -4,11 +4,15 @@ import (
 	"context"
 	"time"
 
+	"resty.dev/v3"
+
+	"github.com/ryansiau/utilities/go/common"
 	"github.com/ryansiau/utilities/go/model"
 )
 
 // Adapter adapts the Reddit RSS fetcher to the Source interface
 type Adapter struct {
+	client *resty.Client
 	config *RedditCrawlerConfig
 	name   string
 }
@@ -23,25 +27,30 @@ func NewAdapter(config *RedditCrawlerConfig, name string) (*Adapter, error) {
 		name = "Reddit: r/" + config.Subreddit
 	}
 
+	client := resty.New().
+		SetTimeout(time.Second*5).
+		SetHeader("User-Agent", common.HTTPClientUserAgent)
+
 	return &Adapter{
 		config: config,
 		name:   name,
+		client: client,
 	}, nil
 }
 
 // Name returns the name of the source
-func (r *Adapter) Name() string {
-	return r.name
+func (a *Adapter) Name() string {
+	return a.name
 }
 
 // Type returns the platform type
-func (r *Adapter) Type() string {
+func (a *Adapter) Type() string {
 	return "reddit"
 }
 
 // Fetch retrieves new content from Reddit
-func (r *Adapter) Fetch(ctx context.Context) ([]model.Content, error) {
-	feed, err := FetchRSS(ctx, r.config.Subreddit)
+func (a *Adapter) Fetch(ctx context.Context) ([]model.Content, error) {
+	feed, err := a.FetchRSS(ctx, a.config.Subreddit)
 	if err != nil {
 		return nil, err
 	}

@@ -3,19 +3,12 @@ package reddit
 import (
 	"context"
 	"fmt"
-
-	"resty.dev/v3"
-
-	"github.com/ryansiau/utilities/go/common"
 )
 
-func FetchSubreddit(ctx context.Context, subreddit string) (*Subreddit, error) {
+func (a *Adapter) FetchSubreddit(ctx context.Context, subreddit string) (*Subreddit, error) {
 	res := Subreddit{}
 
-	client := resty.New()
-	client.SetHeader("User-Agent", common.HTTPClientUserAgent)
-
-	resp, err := client.R().
+	resp, err := a.client.R().
 		SetContext(ctx).
 		SetResult(&res).
 		Get("https://www.reddit.com/r/" + subreddit + ".json")
