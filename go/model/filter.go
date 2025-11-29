@@ -1,8 +1,4 @@
-package filter
-
-import (
-	"github.com/ryansiau/utilities/go/model"
-)
+package model
 
 // Filter defines the interface for content filters
 type Filter interface {
@@ -10,7 +6,7 @@ type Filter interface {
 	Name() string
 
 	// Apply checks if the content passes the filter
-	Apply(content model.Content) bool
+	Apply(content Content) bool
 
 	// Type returns the filter type (Keyword, Regex, etc.)
 	Type() string

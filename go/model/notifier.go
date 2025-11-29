@@ -1,10 +1,6 @@
-package notification
+package model
 
-import (
-	"context"
-
-	"github.com/ryansiau/utilities/go/model"
-)
+import "context"
 
 // Notifier defines the interface for notification channels
 type Notifier interface {
@@ -12,7 +8,7 @@ type Notifier interface {
 	Name() string
 
 	// Send sends a notification for the given content
-	Send(ctx context.Context, content model.Content) error
+	Send(ctx context.Context, content Content) error
 
 	// Type returns the notification type (Console, Email, Discord, etc.)
 	Type() string
