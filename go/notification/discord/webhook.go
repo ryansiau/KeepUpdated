@@ -7,6 +7,7 @@ import (
 
 	"resty.dev/v3"
 
+	"github.com/ryansiau/utilities/go/common"
 	"github.com/ryansiau/utilities/go/model"
 )
 
@@ -32,7 +33,7 @@ type DiscordWebhook struct {
 func NewDiscordWebhook(conf *Config) (model.Notifier, error) {
 	return &DiscordWebhook{
 		conf:   conf,
-		client: resty.New(),
+		client: resty.New().SetHeader("User-Agent", common.HTTPClientUserAgent),
 	}, nil
 }
 

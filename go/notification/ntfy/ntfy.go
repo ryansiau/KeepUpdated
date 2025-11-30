@@ -8,6 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"resty.dev/v3"
 
+	"github.com/ryansiau/utilities/go/common"
 	"github.com/ryansiau/utilities/go/model"
 )
 
@@ -42,7 +43,7 @@ type Ntfy struct {
 func New(conf *Config) (model.Notifier, error) {
 	return &Ntfy{
 		conf:   conf,
-		client: resty.New(),
+		client: resty.New().SetHeader("User-Agent", common.HTTPClientUserAgent),
 	}, nil
 }
 

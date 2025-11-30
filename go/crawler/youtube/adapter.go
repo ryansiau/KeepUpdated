@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/ryansiau/utilities/go/common"
 	"github.com/ryansiau/utilities/go/model"
 
 	"google.golang.org/api/option"
@@ -23,7 +24,7 @@ func NewAdapter(ctx context.Context, name, apiKey string, conf *YouTubeCrawlerCo
 		return nil, fmt.Errorf("youtube_api_key is required")
 	}
 
-	client, err := youtube.NewService(ctx, option.WithAPIKey(apiKey))
+	client, err := youtube.NewService(ctx, option.WithAPIKey(apiKey), option.WithUserAgent(common.HTTPClientUserAgent))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create YouTube client: %w", err)
 	}
