@@ -4,21 +4,24 @@ import (
 	"fmt"
 )
 
-type FilterConfig struct {
-	Name      string      `yaml:"name"`
-	Type      string      `yaml:"type"`
-	Config    interface{} `yaml:"config,omitempty"`
-	Sources   []string    `yaml:"sources"`
-	Notifiers []string    `yaml:"notifiers"`
+type BaseConfig struct {
+	Name   string       `yaml:"name"`
+	Type   string       `yaml:"type"`
+	Config FilterConfig `yaml:"config,omitempty"`
 }
 
 // Validate validates the filter configuration
-func (f *FilterConfig) Validate() error {
-	if f.Name == "" {
+func (c *BaseConfig) Validate() error {
+	if c.Name == "" {
 		return fmt.Errorf("filter name is required")
 	}
-	if f.Type == "" {
+	if c.Type == "" {
 		return fmt.Errorf("filter type is required")
 	}
 	return nil
+}
+
+type FilterConfig interface {
+	Validate() error
+	IsFilterConfig()
 }

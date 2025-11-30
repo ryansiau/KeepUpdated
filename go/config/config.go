@@ -17,7 +17,7 @@ import (
 type Config struct {
 	Sources     []crawler.SourceConfig        `yaml:"sources"`
 	Notifiers   []notification.NotifierConfig `yaml:"notifiers"`
-	Filters     []filter.FilterConfig         `yaml:"filters"`
+	Filters     []filter.BaseConfig           `yaml:"filters"`
 	Credentials Credentials                   `yaml:"credentials"`
 }
 
