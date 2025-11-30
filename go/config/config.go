@@ -15,10 +15,10 @@ import (
 
 // Config represents the entire configuration
 type Config struct {
-	Sources     []crawler.SourceConfig        `yaml:"sources"`
-	Notifiers   []notification.NotifierConfig `yaml:"notifiers"`
-	Filters     []filter.BaseConfig           `yaml:"filters"`
-	Credentials Credentials                   `yaml:"credentials"`
+	Sources     []crawler.SourceConfig    `yaml:"sources"`
+	Notifiers   []notification.BaseConfig `yaml:"notifiers"`
+	Filters     []filter.BaseConfig       `yaml:"filters"`
+	Credentials Credentials               `yaml:"credentials"`
 }
 
 type Credentials struct {
