@@ -18,6 +18,9 @@ func (c *BaseConfig) Validate() error {
 	if c.Type == "" {
 		return fmt.Errorf("filter type is required")
 	}
+	if err := c.Config.Validate(); err != nil {
+		return err
+	}
 	return nil
 }
 
