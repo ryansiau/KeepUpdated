@@ -32,6 +32,8 @@ func (c *Config) Validate() error {
 	return nil
 }
 
+func (c *Config) IsNotifierConfig() {}
+
 type Ntfy struct {
 	conf   *Config
 	client *resty.Client
