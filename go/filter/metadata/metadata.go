@@ -68,11 +68,11 @@ func NewMetadata(config *Config) model.Filter {
 	return &Metadata{config}
 }
 
-func (m Metadata) Name() string {
+func (m *Metadata) Name() string {
 	return "Metadata"
 }
 
-func (m Metadata) Apply(content model.Content) bool {
+func (m *Metadata) Apply(content model.Content) bool {
 	for _, cond := range m.config.Conditions {
 		switch cond.Comp {
 		case CompEqual:
@@ -106,6 +106,6 @@ func (m Metadata) Apply(content model.Content) bool {
 	return true
 }
 
-func (m Metadata) Type() string {
+func (m *Metadata) Type() string {
 	return "Metadata"
 }
