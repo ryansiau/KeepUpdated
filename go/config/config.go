@@ -21,11 +21,6 @@ type Config struct {
 	Credentials Credentials                   `yaml:"credentials"`
 }
 
-// CrawlerConfig defines the interface for crawler configurations
-type CrawlerConfig interface {
-	Validate() error
-}
-
 type Credentials struct {
 	YoutubeApiKey string `yaml:"youtube_api_key"`
 }
