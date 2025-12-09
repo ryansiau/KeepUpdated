@@ -45,13 +45,13 @@ type Adapter struct {
 }
 
 // New creates a new RSS source
-func New(config Config) model.Source {
+func New(config Config, name string) model.Source {
 	client := resty.New().
 		//SetTimeout(5*time.Second).
 		SetHeader("User-Agent", common.HTTPClientUserAgent)
 	return &Adapter{
 		feedURL: config.FeedURL,
-		name:    config.Name,
+		name:    name,
 		client:  client,
 	}
 }

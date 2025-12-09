@@ -5,6 +5,7 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 
+	generic_rss "github.com/ryansiau/utilities/go/crawler/generic-rss"
 	"github.com/ryansiau/utilities/go/crawler/reddit"
 	"github.com/ryansiau/utilities/go/crawler/youtube"
 )
@@ -44,7 +45,13 @@ func (s *SourceConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 		if err != nil {
 			return err
 		}
-
+		s.Config = &cfg
+	case "rss":
+		var cfg generic_rss.Config
+		err := mapstructure.Decode(raw.Config, &cfg)
+		if err != nil {
+			return err
+		}
 		s.Config = &cfg
 	default:
 		return fmt.Errorf("unrecognized config type: %s", s.Type)
