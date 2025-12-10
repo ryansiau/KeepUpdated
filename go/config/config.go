@@ -8,9 +8,9 @@ import (
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
 
-	"github.com/ryansiau/utilities/go/crawler"
 	"github.com/ryansiau/utilities/go/filter"
 	"github.com/ryansiau/utilities/go/notification"
+	"github.com/ryansiau/utilities/go/source"
 )
 
 // Config represents the entire configuration
@@ -33,7 +33,7 @@ type Workflow struct {
 	Name      string                    `yaml:"name"`
 	Enabled   bool                      `yaml:"enabled"`
 	Interval  string                    `yaml:"interval"`
-	Source    crawler.SourceConfig      `yaml:"source"`
+	Source    source.SourceConfig       `yaml:"source"`
 	Filters   []filter.BaseConfig       `yaml:"filters"`
 	Notifiers []notification.BaseConfig `yaml:"notifiers"`
 }

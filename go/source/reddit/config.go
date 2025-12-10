@@ -9,7 +9,7 @@ type RedditCrawlerConfig struct {
 	Subreddit string `yaml:"subreddit" mapstructure:"subreddit"`
 }
 
-// Validate validates the Reddit crawler configuration
+// Validate validates the Reddit source configuration
 func (r *RedditCrawlerConfig) Validate() error {
 	if r.Subreddit == "" {
 		return fmt.Errorf("subreddit is required")

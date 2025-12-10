@@ -9,7 +9,7 @@ type YouTubeCrawlerConfig struct {
 	ChannelID string `yaml:"channel_id" mapstructure:"channel_id"`
 }
 
-// Validate validates the YouTube crawler configuration
+// Validate validates the YouTube source configuration
 func (y *YouTubeCrawlerConfig) Validate() error {
 	if y.ChannelID == "" {
 		return fmt.Errorf("channel_id is required")

@@ -46,7 +46,7 @@ type Twitter struct {
 	name   string
 }
 
-// New creates a new Twitter crawler for a specific user
+// New creates a new Twitter source for a specific user
 func New(config Config) *Twitter {
 	name := fmt.Sprintf("Twitter Crawler - @%s", config.Username)
 	if config.Username == "" && config.UserID != "" {

@@ -1,4 +1,4 @@
-package crawler
+package source
 
 import (
 	"fmt"
@@ -6,9 +6,9 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 
-	generic_rss "github.com/ryansiau/utilities/go/crawler/generic-rss"
-	"github.com/ryansiau/utilities/go/crawler/reddit"
-	"github.com/ryansiau/utilities/go/crawler/youtube"
+	generic_rss "github.com/ryansiau/utilities/go/source/generic-rss"
+	"github.com/ryansiau/utilities/go/source/reddit"
+	"github.com/ryansiau/utilities/go/source/youtube"
 )
 
 // SourceConfig represents the configuration for a content source
@@ -54,7 +54,7 @@ func (c *SourceConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	}
 	c.Type = raw.Type
 	c.Name = raw.Name
-	// Instantiate concrete crawler config based on Type
+	// Instantiate concrete source config based on Type
 	switch c.Type {
 	case "reddit":
 		var cfg reddit.RedditCrawlerConfig
@@ -83,7 +83,7 @@ func (c *SourceConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	return nil
 }
 
-// CrawlerConfig defines the interface for crawler configurations
+// CrawlerConfig defines the interface for source configurations
 type CrawlerConfig interface {
 	Validate() error
 	IsCrawler()
