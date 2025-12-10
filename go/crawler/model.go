@@ -42,7 +42,7 @@ func (c *SourceConfig) Validate() error {
 }
 
 // UnmarshalYAML provides custom unmarshalling for SourceConfig to support interface Config
-func (s *SourceConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
+func (c *SourceConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	// temporary structure to capture raw config
 	var raw struct {
 		Type   string                 `yaml:"type"`
@@ -52,33 +52,33 @@ func (s *SourceConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	if err := unmarshal(&raw); err != nil {
 		return err
 	}
-	s.Type = raw.Type
-	s.Name = raw.Name
+	c.Type = raw.Type
+	c.Name = raw.Name
 	// Instantiate concrete crawler config based on Type
-	switch s.Type {
+	switch c.Type {
 	case "reddit":
 		var cfg reddit.RedditCrawlerConfig
 		err := mapstructure.Decode(raw.Config, &cfg)
 		if err != nil {
 			return err
 		}
-		s.Config = &cfg
+		c.Config = &cfg
 	case "youtube":
 		var cfg youtube.YouTubeCrawlerConfig
 		err := mapstructure.Decode(raw.Config, &cfg)
 		if err != nil {
 			return err
 		}
-		s.Config = &cfg
+		c.Config = &cfg
 	case "rss":
 		var cfg generic_rss.Config
 		err := mapstructure.Decode(raw.Config, &cfg)
 		if err != nil {
 			return err
 		}
-		s.Config = &cfg
+		c.Config = &cfg
 	default:
-		return fmt.Errorf("unrecognized config type: %s", s.Type)
+		return fmt.Errorf("unrecognized config type: %s", c.Type)
 	}
 	return nil
 }

@@ -35,7 +35,7 @@ func (c *BaseConfig) Validate() error {
 	return nil
 }
 
-func (s *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
+func (c *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	var raw struct {
 		Type   string                 `yaml:"type"`
 		Name   string                 `yaml:"name"`
@@ -44,17 +44,17 @@ func (s *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	if err := unmarshal(&raw); err != nil {
 		return err
 	}
-	s.Type = raw.Type
-	s.Name = raw.Name
+	c.Type = raw.Type
+	c.Name = raw.Name
 
-	switch s.Type {
+	switch c.Type {
 	case "title":
 		var cfg title.Config
 		err := mapstructure.Decode(raw.Config, &cfg)
 		if err != nil {
 			return err
 		}
-		s.Config = &cfg
+		c.Config = &cfg
 	case "metadata":
 		var cfg metadata.Config
 		err := mapstructure.Decode(raw.Config, &cfg)
@@ -62,9 +62,9 @@ func (s *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 			return err
 		}
 
-		s.Config = &cfg
+		c.Config = &cfg
 	default:
-		return fmt.Errorf("unrecognized config type: %s", s.Type)
+		return fmt.Errorf("unrecognized config type: %s", c.Type)
 	}
 	return nil
 }
