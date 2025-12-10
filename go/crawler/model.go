@@ -2,6 +2,7 @@ package crawler
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/mitchellh/mapstructure"
 
@@ -15,6 +16,29 @@ type SourceConfig struct {
 	Type   string        `yaml:"type"`
 	Name   string        `yaml:"name"`
 	Config CrawlerConfig `yaml:"config"`
+}
+
+func (c *SourceConfig) Validate() error {
+	// TODO improve this handling
+	validTypes := []string{
+		"youtube",
+		"reddit",
+		"rss",
+	}
+
+	// make sure the source type is valid
+	if !slices.Contains(validTypes, c.Type) {
+		return fmt.Errorf("invalid source type: %s", c.Type)
+	}
+
+	if c.Name == "" {
+		return fmt.Errorf("name is required")
+	}
+	if err := c.Config.Validate(); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // UnmarshalYAML provides custom unmarshalling for SourceConfig to support interface Config

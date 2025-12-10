@@ -2,6 +2,7 @@ package filter
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/mitchellh/mapstructure"
 
@@ -17,11 +18,16 @@ type BaseConfig struct {
 
 // Validate validates the filter configuration
 func (c *BaseConfig) Validate() error {
+	validTypes := []string{
+		"metadata",
+		"title",
+	}
+	if !slices.Contains(validTypes, c.Type) {
+		return fmt.Errorf("invalid filter type: %s", c.Type)
+	}
+
 	if c.Name == "" {
 		return fmt.Errorf("filter name is required")
-	}
-	if c.Type == "" {
-		return fmt.Errorf("filter type is required")
 	}
 	if err := c.Config.Validate(); err != nil {
 		return err
