@@ -64,7 +64,7 @@ func (c *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 		}
 		c.Config = &cfg
 	case "youtube":
-		var cfg youtube.YouTubeCrawlerConfig
+		var cfg youtube.Config
 		err := mapstructure.Decode(raw.Config, &cfg)
 		if err != nil {
 			return err

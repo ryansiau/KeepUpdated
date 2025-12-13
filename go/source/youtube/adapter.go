@@ -18,7 +18,7 @@ type Adapter struct {
 	client    *youtube.Service
 }
 
-func NewAdapter(ctx context.Context, name, apiKey string, conf *YouTubeCrawlerConfig) (model.Source, error) {
+func NewAdapter(ctx context.Context, name, apiKey string, conf *Config) (model.Source, error) {
 	// Log API key configuration
 	if apiKey == "" {
 		return nil, fmt.Errorf("youtube_api_key is required")
