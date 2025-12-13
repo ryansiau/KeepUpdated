@@ -57,7 +57,7 @@ func (c *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	// Instantiate concrete source config based on Type
 	switch c.Type {
 	case "reddit":
-		var cfg reddit.RedditCrawlerConfig
+		var cfg reddit.Config
 		err := mapstructure.Decode(raw.Config, &cfg)
 		if err != nil {
 			return err

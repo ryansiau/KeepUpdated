@@ -13,12 +13,12 @@ import (
 // Adapter adapts the Reddit RSS fetcher to the Source interface
 type Adapter struct {
 	client *resty.Client
-	config *RedditCrawlerConfig
+	config *Config
 	name   string
 }
 
 // NewAdapter creates a new Reddit adapter with configuration
-func NewAdapter(config *RedditCrawlerConfig, name string) (*Adapter, error) {
+func NewAdapter(config *Config, name string) (*Adapter, error) {
 	if err := config.Validate(); err != nil {
 		return nil, err
 	}
