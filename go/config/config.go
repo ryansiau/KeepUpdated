@@ -33,7 +33,7 @@ type Workflow struct {
 	Name      string                    `yaml:"name"`
 	Enabled   bool                      `yaml:"enabled"`
 	Interval  string                    `yaml:"interval"`
-	Source    source.SourceConfig       `yaml:"source"`
+	Source    source.BaseConfig         `yaml:"source"`
 	Filters   []filter.BaseConfig       `yaml:"filters"`
 	Notifiers []notification.BaseConfig `yaml:"notifiers"`
 }

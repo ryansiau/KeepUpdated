@@ -11,14 +11,14 @@ import (
 	"github.com/ryansiau/utilities/go/source/youtube"
 )
 
-// SourceConfig represents the configuration for a content source
-type SourceConfig struct {
-	Type   string        `yaml:"type"`
-	Name   string        `yaml:"name"`
-	Config CrawlerConfig `yaml:"config"`
+// BaseConfig represents the configuration for a content source
+type BaseConfig struct {
+	Type   string       `yaml:"type"`
+	Name   string       `yaml:"name"`
+	Config SourceConfig `yaml:"config"`
 }
 
-func (c *SourceConfig) Validate() error {
+func (c *BaseConfig) Validate() error {
 	// TODO improve this handling
 	validTypes := []string{
 		"youtube",
@@ -41,8 +41,8 @@ func (c *SourceConfig) Validate() error {
 	return nil
 }
 
-// UnmarshalYAML provides custom unmarshalling for SourceConfig to support interface Config
-func (c *SourceConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
+// UnmarshalYAML provides custom unmarshalling for BaseConfig to support interface Config
+func (c *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	// temporary structure to capture raw config
 	var raw struct {
 		Type   string                 `yaml:"type"`
@@ -83,8 +83,8 @@ func (c *SourceConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	return nil
 }
 
-// CrawlerConfig defines the interface for source configurations
-type CrawlerConfig interface {
+// SourceConfig defines the interface for source configurations
+type SourceConfig interface {
 	Validate() error
 	IsCrawler()
 }
