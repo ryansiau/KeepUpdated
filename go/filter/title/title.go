@@ -23,6 +23,10 @@ func (c *Config) Validate() error {
 
 func (c *Config) IsFilterConfig() {}
 
+func (c *Config) Build() (model.Filter, error) {
+	return NewTitleFilter(c), nil
+}
+
 type Title struct {
 	config *Config
 }

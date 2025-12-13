@@ -60,6 +60,10 @@ func (c *Config) Validate() error {
 
 func (c *Config) IsFilterConfig() {}
 
+func (c *Config) Build() (model.Filter, error) {
+	return NewMetadata(c), nil
+}
+
 type Metadata struct {
 	config *Config
 }

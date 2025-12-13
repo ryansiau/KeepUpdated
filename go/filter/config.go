@@ -8,6 +8,7 @@ import (
 
 	"github.com/ryansiau/utilities/go/filter/metadata"
 	"github.com/ryansiau/utilities/go/filter/title"
+	"github.com/ryansiau/utilities/go/model"
 )
 
 type BaseConfig struct {
@@ -72,4 +73,5 @@ func (c *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 type FilterConfig interface {
 	Validate() error
 	IsFilterConfig()
+	Build() (model.Filter, error)
 }
