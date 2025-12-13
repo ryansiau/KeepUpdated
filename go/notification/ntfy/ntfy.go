@@ -35,6 +35,10 @@ func (c *Config) Validate() error {
 
 func (c *Config) IsNotifierConfig() {}
 
+func (c *Config) Build() (model.Notifier, error) {
+	return New(c)
+}
+
 type Ntfy struct {
 	conf   *Config
 	client *resty.Client

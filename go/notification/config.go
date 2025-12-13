@@ -6,6 +6,7 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 
+	"github.com/ryansiau/utilities/go/model"
 	"github.com/ryansiau/utilities/go/notification/discord"
 	"github.com/ryansiau/utilities/go/notification/ntfy"
 )
@@ -70,4 +71,5 @@ func (c *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 type NotifierConfig interface {
 	Validate() error
 	IsNotifierConfig()
+	Build() model.Notifier
 }

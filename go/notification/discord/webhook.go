@@ -25,6 +25,10 @@ func (c *Config) Validate() error {
 
 func (c *Config) IsNotifierConfig() {}
 
+func (c *Config) Build() (model.Notifier, error) {
+	return NewDiscordWebhook(c)
+}
+
 type DiscordWebhook struct {
 	conf   *Config
 	client *resty.Client
