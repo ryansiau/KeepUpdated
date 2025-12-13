@@ -71,5 +71,5 @@ func (c *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 type NotifierConfig interface {
 	Validate() error
 	IsNotifierConfig()
-	Build() model.Notifier
+	Build() (model.Notifier, error)
 }
