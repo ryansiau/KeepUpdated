@@ -2,6 +2,8 @@ package reddit
 
 import (
 	"fmt"
+
+	"github.com/ryansiau/utilities/go/model"
 )
 
 // Config represents the configuration for a Reddit source
@@ -20,5 +22,5 @@ func (r *Config) Validate() error {
 func (r *Config) IsCrawler() {}
 
 func (c *Config) Build(name string) (model.Source, error) {
-	return New(c, name), nil
+	return NewAdapter(c, name)
 }

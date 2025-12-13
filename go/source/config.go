@@ -6,6 +6,7 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 
+	"github.com/ryansiau/utilities/go/model"
 	generic_rss "github.com/ryansiau/utilities/go/source/generic-rss"
 	"github.com/ryansiau/utilities/go/source/reddit"
 	"github.com/ryansiau/utilities/go/source/youtube"
@@ -87,4 +88,5 @@ func (c *BaseConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 type SourceConfig interface {
 	Validate() error
 	IsCrawler()
+	Build(name string) (model.Source, error)
 }

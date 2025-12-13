@@ -18,13 +18,13 @@ type Adapter struct {
 	client    *youtube.Service
 }
 
-func NewAdapter(ctx context.Context, name, apiKey string, conf *Config) (model.Source, error) {
+func NewAdapter(conf *Config, name, apiKey string) (model.Source, error) {
 	// Log API key configuration
 	if apiKey == "" {
 		return nil, fmt.Errorf("youtube_api_key is required")
 	}
 
-	client, err := youtube.NewService(ctx, option.WithAPIKey(apiKey), option.WithUserAgent(common.HTTPClientUserAgent))
+	client, err := youtube.NewService(context.Background(), option.WithAPIKey(apiKey), option.WithUserAgent(common.HTTPClientUserAgent))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create YouTube client: %w", err)
 	}

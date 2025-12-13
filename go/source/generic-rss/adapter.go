@@ -45,7 +45,7 @@ type Adapter struct {
 }
 
 // New creates a new RSS source
-func New(config Config, name string) model.Source {
+func New(config *Config, name string) model.Source {
 	client := resty.New().
 		//SetTimeout(5*time.Second).
 		SetHeader("User-Agent", common.HTTPClientUserAgent)

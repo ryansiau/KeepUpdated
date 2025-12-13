@@ -3,6 +3,8 @@ package generic_rss
 import (
 	"fmt"
 	"net/url"
+
+	"github.com/ryansiau/utilities/go/model"
 )
 
 // Config holds RSS source configuration
@@ -19,3 +21,7 @@ func (c *Config) Validate() error {
 }
 
 func (c *Config) IsCrawler() {}
+
+func (c *Config) Build(name string) (model.Source, error) {
+	return New(c, name), nil
+}

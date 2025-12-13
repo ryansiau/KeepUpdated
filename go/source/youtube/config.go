@@ -2,6 +2,8 @@ package youtube
 
 import (
 	"fmt"
+
+	"github.com/ryansiau/utilities/go/model"
 )
 
 // Config represents the configuration for a YouTube source
@@ -20,5 +22,6 @@ func (y *Config) Validate() error {
 func (y *Config) IsCrawler() {}
 
 func (c *Config) Build(name string) (model.Source, error) {
-	return New(c, name), nil
+	// TODO how to handle api key?
+	return NewAdapter(c, name, "")
 }
