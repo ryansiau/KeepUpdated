@@ -1,4 +1,4 @@
-package scripting
+package graceful_shutdown
 
 import (
 	"os"

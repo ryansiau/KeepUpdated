@@ -1,13 +1,15 @@
-package scripting
+package looper
 
 import (
 	"time"
+
+	"github.com/ryansiau/utilities/go/pkg/graceful-shutdown"
 )
 
 type Looper[T any] interface {
 	SetThreadCount(count int)
 	SetDelay(delay time.Duration)
-	SetGracefulShutdown(gs GracefulShutdown)
+	SetGracefulShutdown(gs graceful_shutdown.GracefulShutdown)
 	Loop(data []T, f func(data T))
 	WaitFinish()
 }
@@ -16,7 +18,7 @@ type looper[T any] struct {
 	threadCount      int
 	sm               chan struct{}
 	delay            time.Duration
-	gracefulShutdown GracefulShutdown
+	gracefulShutdown graceful_shutdown.GracefulShutdown
 }
 
 func NewLooper[T any]() Looper[T] {
@@ -33,7 +35,7 @@ func (l *looper[T]) SetDelay(d time.Duration) {
 	l.delay = d
 }
 
-func (l *looper[T]) SetGracefulShutdown(gs GracefulShutdown) {
+func (l *looper[T]) SetGracefulShutdown(gs graceful_shutdown.GracefulShutdown) {
 	l.gracefulShutdown = gs
 }
 
