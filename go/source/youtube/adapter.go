@@ -42,7 +42,8 @@ func NewAdapter(conf *Config, name string) (model.Source, error) {
 func (a *Adapter) FetchVideos(channelID string) ([]*youtube.Video, error) {
 	call := a.client.Search.List([]string{"snippet"})
 	call.ChannelId(channelID)
-	call.MaxResults(50)
+	call.MaxResults(25)
+	call.Order("date")
 
 	response, err := call.Do()
 	if err != nil {
