@@ -9,7 +9,7 @@ import (
 
 // Config holds RSS source configuration
 type Config struct {
-	FeedURL string `json:"feed_url"`
+	FeedURL string `mapstructure:"feed_url"`
 }
 
 func (c *Config) Validate() error {
