@@ -34,7 +34,7 @@ type DefaultCreds struct {
 type Workflow struct {
 	Name      string                    `yaml:"name"`
 	Enabled   bool                      `yaml:"enabled"`
-	Interval  string                    `yaml:"interval"`
+	Interval  time.Duration             `yaml:"interval"`
 	Source    source.BaseConfig         `yaml:"source"`
 	Filters   []filter.BaseConfig       `yaml:"filters"`
 	Notifiers []notification.BaseConfig `yaml:"notifiers"`
@@ -149,8 +149,8 @@ func (w *Workflow) ValidateNotifiers() error {
 
 func (c *Config) applyDefaults() {
 	for widx, w := range c.Workflows {
-		if w.Interval == "" {
-			w.Interval = c.Defaults.Interval.String()
+		if w.Interval == 0 {
+			w.Interval = c.Defaults.Interval
 		}
 
 		// replace workflows[].notifiers where type == "default" with defaults.notifiers
