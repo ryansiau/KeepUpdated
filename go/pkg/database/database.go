@@ -41,7 +41,7 @@ func NewDB(conf *Config) (*gorm.DB, error) {
 	}
 }
 
-func migrate(db *gorm.DB) error {
+func Migrate(db *gorm.DB) error {
 	err := db.AutoMigrate(
 		&model.Content{},
 		&ConnectionTest{},
@@ -60,7 +60,7 @@ func CheckConnectionCapability(db *gorm.DB) error {
 	var randomId int
 
 	for rollRandomID {
-		randomId = int(rand.Int63n(1>>31 - 1))
+		randomId = int(rand.Int63n(1<<31 - 1))
 
 		res := db.Find(&temp, randomId)
 		if res.Error != nil {
