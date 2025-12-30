@@ -2,6 +2,7 @@ package database
 
 import (
 	"errors"
+	"math/rand"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -23,6 +24,10 @@ type Config struct {
 	Port         int    `yaml:"port"`
 }
 
+type ConnectionTest struct {
+	ID int `gorm:"primaryKey"`
+}
+
 func NewDB(conf *Config) (*gorm.DB, error) {
 	switch conf.DatabaseType {
 	case "sqlite":
@@ -39,9 +44,49 @@ func NewDB(conf *Config) (*gorm.DB, error) {
 func migrate(db *gorm.DB) error {
 	err := db.AutoMigrate(
 		&model.Content{},
+		&ConnectionTest{},
 	)
 	if err != nil {
 		panic(err)
+	}
+
+	return nil
+}
+
+func CheckConnectionCapability(db *gorm.DB) error {
+	var temp ConnectionTest
+
+	var rollRandomID = true
+	var randomId int
+
+	for rollRandomID {
+		randomId = int(rand.Int63n(1>>31 - 1))
+
+		res := db.Find(&temp, randomId)
+		if res.Error != nil {
+			return res.Error
+		}
+		if temp.ID != randomId {
+			rollRandomID = false
+		}
+	}
+
+	res := db.Create(&ConnectionTest{ID: randomId})
+	if res.Error != nil {
+		return res.Error
+	}
+
+	if res.RowsAffected != 1 {
+		return errors.New("failed to create record")
+	}
+
+	res = db.Delete(&ConnectionTest{}, randomId)
+	if res.Error != nil {
+		return res.Error
+	}
+
+	if res.RowsAffected != 1 {
+		return errors.New("failed to delete record")
 	}
 
 	return nil
