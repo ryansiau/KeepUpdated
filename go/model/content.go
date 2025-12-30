@@ -36,11 +36,11 @@ func (m *Metadata) Scan(value interface{}) error {
 		*m = make(map[string]interface{})
 		return nil
 	}
-	bytes, ok := value.([]byte)
+	str, ok := value.(string)
 	if !ok {
 		return errors.New("invalid type for MetadataMap")
 	}
-	err := json.Unmarshal(bytes, m)
+	err := json.Unmarshal([]byte(str), m)
 	return err
 }
 
