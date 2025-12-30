@@ -83,7 +83,6 @@ func (d *DiscordWebhook) Send(ctx context.Context, content model.Content) error 
 	if err != nil {
 		return err
 	}
-	fmt.Println(resp.String())
 
 	if resp.IsError() {
 		return fmt.Errorf("received status code %d: %s", resp.StatusCode(), resp.String())
