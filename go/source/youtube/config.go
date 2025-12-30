@@ -9,6 +9,7 @@ import (
 // Config represents the configuration for a YouTube source
 type Config struct {
 	ChannelID string `yaml:"channel_id" mapstructure:"channel_id"`
+	APIKey    string `yaml:"api_key"`
 }
 
 // Validate validates the YouTube source configuration
@@ -22,6 +23,5 @@ func (y *Config) Validate() error {
 func (y *Config) IsCrawler() {}
 
 func (c *Config) Build(name string) (model.Source, error) {
-	// TODO how to handle api key?
-	return NewAdapter(c, name, "")
+	return NewAdapter(c, name)
 }

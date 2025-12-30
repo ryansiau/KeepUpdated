@@ -12,6 +12,7 @@ import (
 	"github.com/ryansiau/utilities/go/notification"
 	"github.com/ryansiau/utilities/go/pkg/database"
 	"github.com/ryansiau/utilities/go/source"
+	"github.com/ryansiau/utilities/go/source/youtube"
 )
 
 // Config represents the entire configuration
@@ -151,6 +152,14 @@ func (c *Config) applyDefaults() {
 	for widx, w := range c.Workflows {
 		if w.Interval == 0 {
 			w.Interval = c.Defaults.Interval
+		}
+
+		switch w.Source.Type {
+		case "youtube":
+			sourceConfig := w.Source.Config.(*youtube.Config)
+			if sourceConfig.APIKey == "" && c.Defaults.Credentials.YoutubeAPIKey != "" {
+				sourceConfig.APIKey = c.Defaults.Credentials.YoutubeAPIKey
+			}
 		}
 
 		// replace workflows[].notifiers where type == "default" with defaults.notifiers
