@@ -13,6 +13,10 @@ type Config struct {
 }
 
 func (c *Config) Validate() error {
+	if c.FeedURL == "" {
+		return fmt.Errorf("feed_url is required")
+	}
+
 	_, err := url.Parse(c.FeedURL)
 	if err != nil {
 		return fmt.Errorf("failed to parse feed URL: %w", err)
