@@ -2,6 +2,7 @@ package reddit
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"resty.dev/v3"
@@ -60,6 +61,7 @@ func (a *Adapter) Fetch(ctx context.Context) ([]model.Content, error) {
 		// Convert Reddit post to generic Content
 		content := model.Content{
 			ID:          post.ID,
+			SourceID:    a.SourceID(),
 			Title:       post.Title,
 			URL:         post.Link.Href,
 			Author:      post.Author.Name,
@@ -74,6 +76,10 @@ func (a *Adapter) Fetch(ctx context.Context) ([]model.Content, error) {
 	}
 
 	return contents, nil
+}
+
+func (a *Adapter) SourceID() string {
+	return fmt.Sprintf("Reddit:%s", a.config.Subreddit)
 }
 
 // parseTime converts a string time to a time.Time

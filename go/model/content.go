@@ -10,6 +10,7 @@ import (
 // Content represents a generic content item from any platform
 type Content struct {
 	ID          string
+	SourceID    string
 	Title       string
 	Description string
 	URL         string

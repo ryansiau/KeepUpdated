@@ -94,6 +94,7 @@ func (a *Adapter) Fetch(ctx context.Context) ([]model.Content, error) {
 		}
 		contents = append(contents, model.Content{
 			ID:          video.Id,
+			SourceID:    a.SourceID(),
 			Title:       video.Snippet.Title,
 			Description: video.Snippet.Description,
 			URL:         fmt.Sprintf("https://www.youtube.com/watch?v=%s", video.Id),
@@ -108,4 +109,8 @@ func (a *Adapter) Fetch(ctx context.Context) ([]model.Content, error) {
 	}
 
 	return contents, nil
+}
+
+func (a *Adapter) SourceID() string {
+	return fmt.Sprintf("Youtube:%s", a.channelID)
 }

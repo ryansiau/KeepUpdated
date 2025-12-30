@@ -110,7 +110,7 @@ func (r *Adapter) parseFeed(reader io.Reader) ([]model.Content, error) {
 		// Parse publication date
 		pubDate, err := parseDate(item.PubDate)
 		if err != nil {
-			// If we can't parse the date, use current time
+			// If we can't parse the date, use the current time
 			pubDate = time.Now()
 		}
 
@@ -131,6 +131,7 @@ func (r *Adapter) parseFeed(reader io.Reader) ([]model.Content, error) {
 
 		content := model.Content{
 			ID:          strings.TrimSpace(itemID),
+			SourceID:    r.SourceID(),
 			Title:       strings.TrimSpace(item.Title),
 			Description: strings.TrimSpace(contentText),
 			URL:         strings.TrimSpace(item.Link),
@@ -145,6 +146,10 @@ func (r *Adapter) parseFeed(reader io.Reader) ([]model.Content, error) {
 	}
 
 	return contents, nil
+}
+
+func (r *Adapter) SourceID() string {
+	return fmt.Sprintf("RSS:%s", r.feedURL)
 }
 
 // parseDate attempts to parse various RSS date formats

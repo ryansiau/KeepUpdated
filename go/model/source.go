@@ -12,4 +12,8 @@ type Source interface {
 
 	// Type returns the platform type (Reddit, YouTube, etc.)
 	Type() string
+
+	// SourceID returns the identifier of the source
+	// this should be unique for each source
+	SourceID() string
 }
