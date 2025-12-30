@@ -88,7 +88,7 @@ func (a *Adapter) Fetch(ctx context.Context) ([]model.Content, error) {
 
 	var contents []model.Content
 	for _, video := range videos {
-		publishedAt, err := time.Parse(video.Snippet.PublishedAt, time.RFC3339)
+		publishedAt, err := time.Parse(time.RFC3339, video.Snippet.PublishedAt)
 		if err != nil {
 			publishedAt = time.Now()
 		}
