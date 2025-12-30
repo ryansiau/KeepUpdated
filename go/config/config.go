@@ -10,13 +10,15 @@ import (
 
 	"github.com/ryansiau/utilities/go/filter"
 	"github.com/ryansiau/utilities/go/notification"
+	"github.com/ryansiau/utilities/go/pkg/database"
 	"github.com/ryansiau/utilities/go/source"
 )
 
 // Config represents the entire configuration
 type Config struct {
-	Defaults  DefaultConfigs `yaml:"defaults"`
-	Workflows []Workflow     `yaml:"workflows"`
+	Defaults  DefaultConfigs  `yaml:"defaults"`
+	Workflows []Workflow      `yaml:"workflows"`
+	Database  database.Config `yaml:"database"`
 }
 
 type DefaultConfigs struct {
