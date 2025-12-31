@@ -7,8 +7,8 @@ import (
 
 	"resty.dev/v3"
 
-	"github.com/ryansiau/utilities/go/common"
-	"github.com/ryansiau/utilities/go/model"
+	"github.com/ryansiau/KeepUpdated/go/common"
+	"github.com/ryansiau/KeepUpdated/go/model"
 )
 
 type Config struct {

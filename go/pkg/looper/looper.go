@@ -3,7 +3,7 @@ package looper
 import (
 	"time"
 
-	"github.com/ryansiau/utilities/go/pkg/graceful-shutdown"
+	"github.com/ryansiau/KeepUpdated/go/pkg/graceful-shutdown"
 )
 
 type Looper[T any] interface {

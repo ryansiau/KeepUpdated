@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/ryansiau/utilities/go/model"
+	"github.com/ryansiau/KeepUpdated/go/model"
 )
 
 // Config holds RSS source configuration

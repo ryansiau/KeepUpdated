@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ryansiau/utilities/go/common"
-	"github.com/ryansiau/utilities/go/model"
+	"github.com/ryansiau/KeepUpdated/go/common"
+	"github.com/ryansiau/KeepUpdated/go/model"
 
 	"google.golang.org/api/option"
 	"google.golang.org/api/youtube/v3"

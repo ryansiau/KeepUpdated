@@ -3,7 +3,7 @@ package youtube
 import (
 	"fmt"
 
-	"github.com/ryansiau/utilities/go/model"
+	"github.com/ryansiau/KeepUpdated/go/model"
 )
 
 // Config represents the configuration for a YouTube source

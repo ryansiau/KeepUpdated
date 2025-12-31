@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ryansiau/utilities/go/model"
+	"github.com/ryansiau/KeepUpdated/go/model"
 )
 
 type Config struct {

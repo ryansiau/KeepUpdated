@@ -6,9 +6,9 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/ryansiau/utilities/go/filter/metadata"
-	"github.com/ryansiau/utilities/go/filter/title"
-	"github.com/ryansiau/utilities/go/model"
+	"github.com/ryansiau/KeepUpdated/go/filter/metadata"
+	"github.com/ryansiau/KeepUpdated/go/filter/title"
+	"github.com/ryansiau/KeepUpdated/go/model"
 )
 
 type BaseConfig struct {

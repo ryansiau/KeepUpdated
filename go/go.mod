@@ -1,4 +1,4 @@
-module github.com/ryansiau/utilities/go
+module github.com/ryansiau/KeepUpdated/go
 
 go 1.24.0
 

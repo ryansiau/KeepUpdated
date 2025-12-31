@@ -6,9 +6,9 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/ryansiau/utilities/go/model"
-	"github.com/ryansiau/utilities/go/notification/discord"
-	"github.com/ryansiau/utilities/go/notification/ntfy"
+	"github.com/ryansiau/KeepUpdated/go/model"
+	"github.com/ryansiau/KeepUpdated/go/notification/discord"
+	"github.com/ryansiau/KeepUpdated/go/notification/ntfy"
 )
 
 type BaseConfig struct {

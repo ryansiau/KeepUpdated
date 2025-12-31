@@ -4,7 +4,7 @@ import (
 	"container/heap"
 	"time"
 
-	"github.com/ryansiau/utilities/go/config"
+	"github.com/ryansiau/KeepUpdated/go/config"
 )
 
 type WorkflowHeap []*Execution

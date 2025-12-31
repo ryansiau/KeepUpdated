@@ -8,11 +8,11 @@ import (
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
 
-	"github.com/ryansiau/utilities/go/filter"
-	"github.com/ryansiau/utilities/go/notification"
-	"github.com/ryansiau/utilities/go/pkg/database"
-	"github.com/ryansiau/utilities/go/source"
-	"github.com/ryansiau/utilities/go/source/youtube"
+	"github.com/ryansiau/KeepUpdated/go/filter"
+	"github.com/ryansiau/KeepUpdated/go/notification"
+	"github.com/ryansiau/KeepUpdated/go/pkg/database"
+	"github.com/ryansiau/KeepUpdated/go/source"
+	"github.com/ryansiau/KeepUpdated/go/source/youtube"
 )
 
 // Config represents the entire configuration

@@ -5,9 +5,9 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/ryansiau/utilities/go/config"
-	graceful_shutdown "github.com/ryansiau/utilities/go/pkg/graceful-shutdown"
-	"github.com/ryansiau/utilities/go/worker"
+	"github.com/ryansiau/KeepUpdated/go/config"
+	graceful_shutdown "github.com/ryansiau/KeepUpdated/go/pkg/graceful-shutdown"
+	"github.com/ryansiau/KeepUpdated/go/worker"
 )
 
 func main() {

@@ -6,10 +6,10 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/ryansiau/utilities/go/model"
-	generic_rss "github.com/ryansiau/utilities/go/source/generic-rss"
-	"github.com/ryansiau/utilities/go/source/reddit"
-	"github.com/ryansiau/utilities/go/source/youtube"
+	"github.com/ryansiau/KeepUpdated/go/model"
+	generic_rss "github.com/ryansiau/KeepUpdated/go/source/generic-rss"
+	"github.com/ryansiau/KeepUpdated/go/source/reddit"
+	"github.com/ryansiau/KeepUpdated/go/source/youtube"
 )
 
 // BaseConfig represents the configuration for a content source

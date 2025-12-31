@@ -3,7 +3,7 @@ package filter
 import (
 	"strings"
 
-	"github.com/ryansiau/utilities/go/model"
+	"github.com/ryansiau/KeepUpdated/go/model"
 )
 
 // KeywordFilter is a filter that checks for keywords in the content title

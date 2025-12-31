@@ -11,11 +11,11 @@ import (
 
 	"github.com/avast/retry-go/v5"
 
-	"github.com/ryansiau/utilities/go/config"
-	"github.com/ryansiau/utilities/go/model"
-	"github.com/ryansiau/utilities/go/pkg/database"
-	graceful_shutdown "github.com/ryansiau/utilities/go/pkg/graceful-shutdown"
-	workflow_heap "github.com/ryansiau/utilities/go/worker/workflow-heap"
+	"github.com/ryansiau/KeepUpdated/go/config"
+	"github.com/ryansiau/KeepUpdated/go/model"
+	"github.com/ryansiau/KeepUpdated/go/pkg/database"
+	graceful_shutdown "github.com/ryansiau/KeepUpdated/go/pkg/graceful-shutdown"
+	workflow_heap "github.com/ryansiau/KeepUpdated/go/worker/workflow-heap"
 )
 
 type Worker struct {

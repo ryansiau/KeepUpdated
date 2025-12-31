@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ryansiau/utilities/go/model"
+	"github.com/ryansiau/KeepUpdated/go/model"
 )
 
 // ConsoleNotifier is a simple notifier that prints to the console
